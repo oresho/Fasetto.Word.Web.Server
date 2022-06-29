@@ -57,3 +57,10 @@
 /Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.Extensions.Identity.Core.dll
 /Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/Users/oreoluwasomuyiwa/Projects/Fasetto.Word.Web.Server/Fasetto.Word.Web.Server/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll

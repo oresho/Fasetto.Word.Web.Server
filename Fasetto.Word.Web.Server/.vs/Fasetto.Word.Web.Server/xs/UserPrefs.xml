@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{9538B999-495B-4924-8E4E-1B26C0BF0B64}|EntityFrameworkBasics">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Startup.cs">
+    <Files>
+      <File FileName="Startup.cs" Line="47" Column="1" />
+      <File FileName="Controllers/HomeController.cs" Line="94" Column="10" />
+      <File FileName="Controllers/ApiController.cs" Line="32" Column="46" />
+      <File FileName="IoC/IocContainer.cs" Line="19" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Fasetto.Word.Web.Server" expanded="True">
+            <Node name="Fasetto.Word.Web.Server" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="IoC" expanded="True" />
+              <Node name="Startup.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Fasetto.Word.Web.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

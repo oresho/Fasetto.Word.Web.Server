@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Fasetto.Word.Web.Server.Data;
 using Fasetto.Word.Web.Server.IoC;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Fasetto.Word.Web.Server.Controllers
 {
+    /// <summary>
+    /// manages the standard web server pages
+    /// </summary>
     public class HomeController : Controller
     {
         #region Protected Members
@@ -84,11 +88,20 @@ namespace Fasetto.Word.Web.Server.Controllers
         }
 
         //private area for logged in users
-        [Authorize]
+        //changed from demo cookie auth scheme(Identity.Application) to Jwt auth scheme(Bearer) so cookies wont access private without token
+        [Authorize(AuthenticationSchemes = "Identity.Application,Bearer")]//JwtBearerDefaults.AuthenticationScheme)]
         [Route("private")]
         public IActionResult Private()
         {
             return Content($"This area is private. Welcome {HttpContext.User.Identity.Name}", "text/html");
+        }
+
+        [Route("logout")]
+        public async Task<IActionResult> SignOutAsync()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);//when the arguments for this signout are empty the signout doesnt delete cookies
+
+            return Content("done", "text/html");
         }
 
         //Login page
@@ -97,6 +110,7 @@ namespace Fasetto.Word.Web.Server.Controllers
         {
             //signout any previous sessions
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            //return Content("No login for you");
 
             var result = await signInManager.PasswordSignInAsync("angelsix", "password", true,false);
 
@@ -108,13 +122,6 @@ namespace Fasetto.Word.Web.Server.Controllers
             return Content("Failed to Login", "text/html");
         }
 
-        [Route("logout")]
-        public async Task<IActionResult> SignOutAsync()
-        {
-            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-
-            return Content("done", "text/html");
-        }
 
     }
 }

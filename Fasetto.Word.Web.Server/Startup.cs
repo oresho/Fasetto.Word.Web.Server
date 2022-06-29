@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Fasetto.Word.Web.Server.Data;
 using Fasetto.Word.Web.Server.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Fasetto.Word.Web.Server
 {
@@ -20,10 +18,11 @@ namespace Fasetto.Word.Web.Server
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            // Share the configuration
+            IocContainer.Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        //public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -31,7 +30,7 @@ namespace Fasetto.Word.Web.Server
             services.AddControllersWithViews();
             //Add ApplicationDBCOntext to DI
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(IocContainer.Configuration.GetConnectionString("DefaultConnection")));
 
             //AddIdentity adds cookie-based Authentication
             //Adds scoped classes for things like UserManager, SignInManager, PasswordHashers etc.
@@ -44,6 +43,22 @@ namespace Fasetto.Word.Web.Server
                 //Adds a provider that generates unique keys and hashes for things like
                 //forgot password links, phone number verfication codes etc.
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = IocContainer.Configuration["Jwt:Issuer"],
+                        ValidAudience = IocContainer.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(IocContainer.Configuration["Jwt:SecretKey"]))
+                    };
+                });
 
             //change password policy/validations
             services.Configure<IdentityOptions>(options =>
@@ -59,9 +74,10 @@ namespace Fasetto.Word.Web.Server
             services.ConfigureApplicationCookie(options =>
             {
                 //redirect to login
-                options.LoginPath = "/login";
+                options.LoginPath = "/login";//when private is unauthorized it redirects to this configured path
+
                 //change cookie timeout to 15 seconds
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(15);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(1500);
             });
             
         }
